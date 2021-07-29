@@ -1,0 +1,53 @@
+ ERA52ARL Nov 2019 version.g.1
+ numsfc=          14
+ numatm=           6
+ numlev=          37
+ levels=        1000         975         950         925         900         875         850         825         800         775         750         700         650         600         550         500         450         400         350         300         250         225         200         175         150         125         100          70          50          30          20          10           7           5           3           2           1
+ grib_name=../data/ERA5_2021.Jun02.2dpl.all.grib                                           
+ num_msg=         264
+ grib_name=../data/ERA5_2021.Jun02.3dpl.grib                                               
+ num_msg=        5328
+ Number of time periods found          24
+ =============================
+ PROJECTION regular_ll
+ vertical coordinate=           2
+   30.0000000      -85.0000000       50.0000000      -70.0000000      0.250000000      0.250000000    
+ number of surface variables          14
+ number of atmospheric variables           6
+ ---------------------------------------------------------
+ checking  2d analysis and 3d pressure level have same grid
+   30.0000000       30.0000000    
+   30.0000000       30.0000000    
+  -85.0000000      -85.0000000    
+   50.0000000       50.0000000    
+  -70.0000000      -70.0000000    
+  0.250000000      0.250000000    
+  0.250000000      0.250000000    
+          61          61
+          81          81
+ ---------------------------------------------------------
+          61          81        4941
+ Finished TIME:           21           6           2           0           0
+ Finished TIME:           21           6           2           1           0
+ Finished TIME:           21           6           2           2           0
+ Finished TIME:           21           6           2           3           0
+ Finished TIME:           21           6           2           4           0
+ Finished TIME:           21           6           2           5           0
+ Finished TIME:           21           6           2           6           0
+ Finished TIME:           21           6           2           7           0
+ Finished TIME:           21           6           2           8           0
+ Finished TIME:           21           6           2           9           0
+ Finished TIME:           21           6           2          10           0
+ Finished TIME:           21           6           2          11           0
+ Finished TIME:           21           6           2          12           0
+ Finished TIME:           21           6           2          13           0
+ Finished TIME:           21           6           2          14           0
+ Finished TIME:           21           6           2          15           0
+ Finished TIME:           21           6           2          16           0
+ Finished TIME:           21           6           2          17           0
+ Finished TIME:           21           6           2          18           0
+ Finished TIME:           21           6           2          19           0
+ Finished TIME:           21           6           2          20           0
+ Finished TIME:           21           6           2          21           0
+ Finished TIME:           21           6           2          22           0
+ Finished TIME:           21           6           2          23           0
