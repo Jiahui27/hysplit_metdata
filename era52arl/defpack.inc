@@ -1,25 +1,22 @@
-! DEFPACK.INC
 
-! Structure for packing routines
+! RCS file, release, date & time of last delta, author, state, [and locker]
+! $Header: /nas01/depts/ie/cempd/apps/CMAQ/v5.0.1/CMAQv5.0.1/models/TOOLS/src/mcip2arl/DEFPACK.INC,v 1.1.1.1 2012/04/19 19:48:37 sjr Exp $
 
-! Last Revision: 13 Jul 1999 (RRD)
+!-------------------------------------------------------------------------------
+! DEFPACK.INC - Structure for packing routines
+!-------------------------------------------------------------------------------
+! Last Revision: 13 Jul 1999 (RRD) 
 !                20 Sep 2000 (RRD) - fortran90 upgrade
+!                18 Oct 2001 (RRD) - support for large grids
+!                03 Oct 2002 (RRD) - more vertical levels
 
 !-------------------------------------------------------------------------------
-! packed data set array limits set here
-!-------------------------------------------------------------------------------
+! packed data set array limits set here           
 
-  INTEGER,  PARAMETER :: mlvl  =   80      ! number of vertical levels
-  INTEGER,  PARAMETER :: mvar  =   35      ! number of different variables
-!JCL(3/19/03) larger header to account for increased number of variables
-!CHG(10/01/03) larger header to account for 16 bits
-!  INTEGER,  PARAMETER :: mlen  = 3072      ! maximum length of header record
-!  INTEGER,  PARAMETER :: mlen  = 6000      ! maximum length of header record
-  INTEGER,  PARAMETER :: mlen  = 13000      ! maximum length of header record
+  INTEGER,  PARAMETER :: mlvl  =   75      ! number of vertical levels
+  INTEGER,  PARAMETER :: mvar  =   35      ! number of different variables 
+  INTEGER,  PARAMETER :: mlen  = 3072      ! maximum length of header record
   INTEGER,  PARAMETER :: mgrd  =    3      ! number of simultaneous grids
-
-!-------------------------------------------------------------------------------
-!-------------------------------------------------------------------------------
 
   TYPE MFILES
      SEQUENCE
@@ -32,7 +29,9 @@
      CHARACTER(4)     :: varb (mvar,mlvl)      ! variable identification
      CHARACTER(4)     :: model                 ! model identification
      LOGICAL          :: newt                  ! new time flag
+     LOGICAL          :: xgpt                  ! xtended number of grid points
      INTEGER          :: ig                    ! unique grid number
+     CHARACTER(2)     :: igc,igd               ! character equivalent of ig
      INTEGER          :: ksys                  ! vertical coordinate system
      INTEGER          :: nxg,nyg               ! horizontal grid points
      INTEGER          :: nlvl                  ! number of vertical levels
@@ -44,7 +43,7 @@
      INTEGER          :: kunit                 ! output unit number
      INTEGER          :: lrec                  ! bytes in data part of record
      INTEGER          :: lenh                  ! bytes in extended header
-                                               ! (110 + NLVL * ( 8 + NVAR*8 ))
+                                               ! (108 + NLVL * ( 8 + NVAR*8 ))
      INTEGER          :: nhrec                 ! number of extended header recs
      INTEGER          :: nhbyt                 ! bytes last extend header rec
 
@@ -52,6 +51,5 @@
 
 !-------------------------------------------------------------------------------
 ! define meteorological grid and file structure
-!-------------------------------------------------------------------------------
 
   TYPE(mfiles)  :: gv(mgrd)    ! define for each meteorological grid

@@ -231,3 +231,4 @@ cython_debug/
 ERA52ARL.MESSAGE
 get_era5_message.txt
 data/
+era52arl

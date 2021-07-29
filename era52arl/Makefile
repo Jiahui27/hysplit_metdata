@@ -31,8 +31,8 @@ LIBHYS = -L../../library -lhysplit
 
 FFLAGS_FREEFORM=-ffree-form
 
-FFLAGS = -ffpe-trap=zero,invalid,overflow,underflow \
-	-W -Wall -fbounds-check -pedantic-errors
+# FFLAGS = -ffpe-trap=zero,invalid,overflow,underflow \
+# 	-W -Wall -fbounds-check -pedantic-errors
 
 FCFLAGS = -g $(FFLAGS) $(FFLAGS_FREEFORM)
 
@@ -50,9 +50,9 @@ FCLINK = $(FCLD) $(FCFLAGS) $(AM_LDFLAGS) \
 .SUFFIXES: .f90 .lo .o .obj
 
 # $(PGM): $(PGM).o $(api2arl_DEPENDENCIES)
-$(PGM): $(PGM).o
+$(PGM): $(PGM).o pakmod.o
 	@rm -f $(PGM)
-	$(FCLINK) $(PGM).o $(ECCODESLIBS) $(ECCODESINC) -leccodes_f90 -leccodes
+	$(FCLINK) pakmod.o $(PGM).o $(ECCODESLIBS) $(ECCODESINC) -leccodes_f90 -leccodes
 
 
 .f90.o:
