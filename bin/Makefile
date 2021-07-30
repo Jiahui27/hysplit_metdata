@@ -18,6 +18,7 @@
 # include ../../Makefile.inc
 FC=gfortran
 
+# ecCodes installed by `brew install eccodes`
 ECCODES_TOPDIR=/usr/local/Cellar/eccodes/2.22.1
 ECCODESINC=-I$(ECCODES_TOPDIR)/include
 ECCODESLIBS=-L$(ECCODES_TOPDIR)/lib

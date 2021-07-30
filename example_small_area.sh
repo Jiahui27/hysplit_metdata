@@ -44,7 +44,7 @@ mv new_era52arl.cfg era52arl.cfg
 # all the data downloaded properly.
 #-----------------------------------------
 
-MDL=./era52arl
+MDL=./bin
 monthname='Jun'
 for month in '06'
 do
@@ -53,7 +53,7 @@ do
        echo '---------------------------------------------------------------------------------'
        echo $MDL/era52arl -i${outdir}ERA5_$year.${monthname}${day}.3dpl.grib -a${outdir}ERA5_${year}.${monthname}${day}.2dpl.all.grib
        $MDL/era52arl -i${outdir}ERA5_$year.${monthname}${day}.3dpl.grib -a${outdir}ERA5_${year}.${monthname}${day}.2dpl.all.grib
-       mv DATA.ARL ERA5_${year}${month}${day}.ARL
+       mv DATA.ARL ${outdir}ERA5_${year}${month}${day}.ARL
        echo 'DONE ---------------------------------------------------------------------------------'
      done
 done

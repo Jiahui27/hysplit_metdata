@@ -1,7 +1,22 @@
 
 # hysplit_metdata
 
-### get_era5_cds.py 
+## notes for this forked repo
+This is a forked version of the original [`hysplit_metdata`](https://github.com/amcz/hysplit_metdata).
+All files included here are tested on macOS Big Sur (intel) based on `homebrew`-ed `eccodes` (`brew install eccodes`).
+
+### changes
+
+1. restructured directory to separate script (`*.py` and `*.sh`) and binary build (fortran source code and `makefile`, now under `bin`).
+1. added missing `pak<**>` subroutines from [THREEOCLOCKWORK/CMAQ502](https://github.com/THREEOCLOCKWORK/CMAQ502).
+
+2. modified `makefile` to build `pak<**>` subroutines.
+
+3. added paths to `eccodes` in `makefile`.
+## original notes below
+
+---
+### get_era5_cds.py
 Code to download ERA5 meteorological data from ECMWF that will suitable for converting to ARL format for ingestion into HYSPLIT.
 The downloaded grib files will be suitable for use with the era52arl program available with the HYSPLIT distribution.
 
@@ -13,9 +28,9 @@ PYTHON 3.x
 Written to run on linux operating system
 
 This python program aids in retrieving  meteorological variables from the ERA5 dataset which HYSPLIT needs.
-grib files can be input into the era52arl fortran utility program (provided with the HYSPLIT distrubtion) 
+grib files can be input into the era52arl fortran utility program (provided with the HYSPLIT distrubtion)
 to create a meteorological file that can be used
-as input into HYSPLIT. 
+as input into HYSPLIT.
 
 for command line options run with --help <br>
 The program will write a file called new_era52arl.cfg. This file can be used as an input into the era52arl conversion program.
@@ -27,8 +42,8 @@ era52arl will also convert the ensemble data.
 
 ### era52arl.f
 The fortran program era52arl.f is included in the data2arl directory of the HYSPLIT distribution.
-Beta versions may be included here. era52arl.f requires eccodes as well as libraries included in the HYSPLIT distribution 
-to compile. 
+Beta versions may be included here. era52arl.f requires eccodes as well as libraries included in the HYSPLIT distribution
+to compile.
 
 # Possible Issues
 
@@ -52,7 +67,7 @@ edit the era52arl.cfg file which is input into the era52arl program and remove t
 
 HYSPLIT convention is that upward heat flux is positive. ERA5 uses the opposite convention.
 
-Make sure that a conversion factor is negative in the era52arl.cfg file. 
+Make sure that a conversion factor is negative in the era52arl.cfg file.
 
 
 # installing cdsapi
@@ -121,7 +136,7 @@ The api key must be stored in $HOME/.cdsapirc
                 'number' : '0/1/2/3/4/5/6/7/8/9'
                 },
                 'outputname')
-                
+
 ## Ensemble data surface variables
 
 Note that slhf (surface latent heat flux), sshf (surface sensible heat flux), and tp (total precipitation) are not
@@ -155,7 +170,7 @@ https://confluence.ecmwf.int/display/ECC/GRIB+tools
 Example
 
     gribdump gribfile.grib > out
-    
+
 # conversion factors
 
 surface radition accumulated parameters (slhf, ssrd, sshf)
