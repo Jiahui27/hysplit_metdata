@@ -2,9 +2,14 @@
 # hysplit_metdata
 
 ## notes for this forked repo
-This is a forked version of the original [`hysplit_metdata`](https://github.com/amcz/hysplit_metdata).
-All files included here are tested on macOS Big Sur (intel) based on `homebrew`-ed `eccodes` (`brew install eccodes`).
+This is a forked version of the original [`hysplit_metdata`](https://github.com/amcz/hysplit_metdata) with [necessary changes](#changes) to get the whole workflow complete and running.
+All files included here are tested on **macOS Big Sur (Intel)** based on `homebrew`-ed `eccodes`.
 
+### instructions
+
+1. install `eccodes` with `homebrew`: `brew install eccodes`
+2. build `era52arl`: `cd bin; make`
+3. try out the `example_small_area.sh` script to download the ERA5 data and convert them to ARL for HYSPLIT.
 ### changes
 
 1. restructured directory to separate script (`*.py` and `*.sh`) and binary build (fortran source code and `makefile`, now under `bin`).
@@ -13,6 +18,7 @@ All files included here are tested on macOS Big Sur (intel) based on `homebrew`-
 2. modified `makefile` to build `pak<**>` subroutines.
 
 3. added paths to `eccodes` in `makefile`.
+
 ## original notes below
 
 ---
