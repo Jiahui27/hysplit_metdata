@@ -1,6 +1,7 @@
 
 # hysplit_metdata
 
+**A standalone solution for converting ERA5 data to ARL format for HYSPLIT**
 ## notes for this forked repo
 This is a forked version of the original [`hysplit_metdata`](https://github.com/amcz/hysplit_metdata) with [necessary changes](#changes) to get the whole workflow complete and running.
 All files included here are tested on **macOS Big Sur (Intel)** based on `homebrew`-ed `eccodes`.
