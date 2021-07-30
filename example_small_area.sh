@@ -21,17 +21,17 @@ area="50/-85/30/-70"
 #directory to write files to.
 outdir='./data/'
 
-# for month in '06'
-# do
-#      for day  in   $(seq 1  10)
-#      do
-#               echo "RETRIEVING  month $month day $day"
-#               # retrieves pressure level files
-#               $MDL ${PDL}/get_era5_cds.py  --3d   -y $year -m $month  -d $day --dir $outdir  -g  --area $area
-#               # retrieves surface data files with all variables
-#               $MDL ${PDL}/get_era5_cds.py  --2da  -y $year -m $month  -d $day --dir $outdir  -g  --area $area
-#      done
-# done
+for month in '06'
+do
+     for day  in   $(seq 1  10)
+     do
+              echo "RETRIEVING  month $month day $day"
+              # retrieves pressure level files
+              $MDL ${PDL}/get_era5_cds.py  --3d   -y $year -m $month  -d $day --dir $outdir  -g  --area $area
+              # retrieves surface data files with all variables
+              $MDL ${PDL}/get_era5_cds.py  --2da  -y $year -m $month  -d $day --dir $outdir  -g  --area $area
+     done
+done
 
 # use the cfg file created for the conversion.
 mv new_era52arl.cfg era52arl.cfg
