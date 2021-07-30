@@ -1,6 +1,6 @@
 #!/bin/sh
 # Example bash script for retrieving ERA5 global data
-# Author: Alice Crawford   Organization: NOAA/OAR/ARL 
+# Author: Alice Crawford   Organization: NOAA/OAR/ARL
 
 # example for downloading and converting global ERA5 data
 # on pressure levels.
@@ -10,11 +10,11 @@
 MDL="python"
 
 #Location of get_era5_cds.py
-PDL=$HOME/hysplit_metdata
-year=2017
+PDL=.
+year=2021
 
 #directory to write files to.
-outdir='./'
+outdir='./data/'
 
 # possible values are 2,4, and 8.
 # determines how many files are retrieved per day.
@@ -22,15 +22,15 @@ outdir='./'
 # smaller files are usually retrieved faster with less download errors.
 splitnum=8
 
-for month in '01'
+for month in '06'
 do
      for day  in   $(seq 1  31)
      do
        # retrieves daily surface data files with all variables
-       $MDL ${PDL}/get_era5_cds.py  --2da  -y $year -m $month  -d $day --dir $outdir  -g 
+       $MDL ${PDL}/get_era5_cds.py  --2da  -y $year -m $month  -d $day --dir $outdir  -g
        for tm in $(seq 1 $splitnum)
        do
-          # retrieve pressure level data in 3 hour increments (1-8). 
+          # retrieve pressure level data in 3 hour increments (1-8).
           $MDL ${PDL}/get_era5_cds.py  --3d   -y $year -m $month  -d $day --dir $outdir  --split $splitnum -g -q$tm
        done
      done
@@ -40,16 +40,15 @@ mv new_era52arl.cfg era52arl.cfg
 
 #-----------------------------------------
 # convert data to ARL format
-
-# In practice you may want to run the following 
+# In practice you may want to run the following
 # in a separate script, after you have confirmed that
 # all the data downloaded properly.
 #-----------------------------------------
 
 #location of era52arl executable
-MDL=$HOME/hysplit/data2arl/era52arl/
-monthname='Jan'
-for month in '01'
+MDL=./src_era52arl
+monthname='Jun'
+for month in '06'
 do
      for day  in   {01..31}
      do
@@ -62,7 +61,7 @@ do
        # if you want to keep separate ARL files
        mv DATA.ARL ERA5_${year}${month}${day}.T${tm}.ARL
        # if you want to create a daily ARL file.
-       cat DATA.ARL >> $dailyfile 
+       cat DATA.ARL >> $dailyfile
        echo 'DONE ---------------------------------------------------------------------------------'
        done
      done
