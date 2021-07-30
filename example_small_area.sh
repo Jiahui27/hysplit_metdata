@@ -44,7 +44,7 @@ mv new_era52arl.cfg era52arl.cfg
 # all the data downloaded properly.
 #-----------------------------------------
 
-MDL=./bin
+MDL=./src_era52arl
 monthname='Jun'
 for month in '06'
 do

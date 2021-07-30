@@ -9,11 +9,14 @@ All files included here are tested on **macOS Big Sur (Intel)** based on `homebr
 ### instructions
 
 1. install `eccodes` with `homebrew`: `brew install eccodes`
-2. build `era52arl`: `cd bin; make`
-3. try out the `example_small_area.sh` script to download the ERA5 data and convert them to ARL for HYSPLIT.
+2. modify the `eccodes` related paths in `makefile` under `src_era52arl`:
+   1. use `brew info eccodes` to locate the `eccodes` installation path.
+   2. change `ECCODES_TOPDIR` to the `eccodes` installation path.
+3. build `era52arl`: `cd src_era52arl; make`
+4. try out the `example_small_area.sh` script to download the ERA5 data and convert them to ARL for HYSPLIT.
 ### changes
 
-1. restructured directory to separate script (`*.py` and `*.sh`) and binary build (fortran source code and `makefile`, now under `bin`).
+1. restructured directory to separate script (`*.py` and `*.sh`) and binary build (fortran source code and `makefile`, now under `src_era52arl`).
 1. added missing `pak<**>` subroutines from [THREEOCLOCKWORK/CMAQ502](https://github.com/THREEOCLOCKWORK/CMAQ502).
 
 2. modified `makefile` to build `pak<**>` subroutines.
