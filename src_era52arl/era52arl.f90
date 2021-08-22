@@ -100,7 +100,7 @@
 
 PROGRAM era52arl
    USE eccodes
-   USE strings
+   ! USE strings
    IMPLICIT NONE
 
    INTEGER                            ::  fff, iii, qqq  !num of time periods, counter
@@ -514,14 +514,14 @@ PROGRAM era52arl
                !WRITE(*,*) 'value, pcat, pnum ', trim(value), pcat, pnum
                kv = -1
                DO k = 1, numatm
+                  ! WRITE (*, *) 'i, k', i, k
                   IF (pcat .EQ. atmcat(k) .AND. pnum .EQ. atmnum(k) .AND. TRIM(VALUE_def) .EQ. atmgrb(k)) THEN
                      kv = k
-                     !WRITE(*,*) 'i, k', i, k
-                     !WRITE(*,*) 'pcat ', pcat, atmcat(k)
-                     !WRITE(*,*) 'pnum ', pnum, atmnum(k)
-                     !WRITE(*,*) 'value ', value, atmgrb(k)
-                     !else
-                     !    WRITE(*,*) 'NOT FOUND'
+                     ! WRITE (*, *) 'pcat ', pcat, atmcat(k)
+                     ! WRITE (*, *) 'pnum ', pnum, atmnum(k)
+                     ! WRITE (*, *) 'value ', VALUE_def, atmgrb(k)
+                     ! ELSE
+                     !    WRITE (*, *) 'NOT FOUND'
                   END IF
                END DO
 
@@ -560,10 +560,13 @@ PROGRAM era52arl
                CALL grib_get(igrib(i), 'indicatorOfParameter', pcat)
                kv = -1
                DO k = 1, numatm
-                  if (pcat.eq.atmcat(k) .and. pnum.eq.atmnum(k) .and. trim(VALUE_def).eq.atmgrb(k)) kv=k
-                  ! IF (pcat .EQ. atmcat(k) .AND. TRIM(VALUE_def) .EQ. lowercase(atmgrb(k))) kv = k
+                  ! IF (pcat .EQ. atmcat(k) .AND. pnum .EQ. atmnum(k) .AND. TRIM(VALUE_def) .EQ. TRIM(atmgrb(k))) kv = k
+                  IF (pcat .EQ. atmcat(k) .AND. TRIM(VALUE_def) .EQ. TRIM(atmgrb(k))) kv = k
+                  ! WRITE (*, *) i, ltype, '3dv '
+                  ! WRITE (*, *) 'pcat,atmcat ', pcat, atmcat(k), pcat .EQ. atmcat(k)
+                  ! WRITE (*, *) 'pnum,atmnum ', pnum, atmnum(k), pnum .EQ. atmnum(k)
+                  ! WRITE (*, *) 'VALUE_def,atmgrb ', VALUE_def, atmgrb(k), TRIM(VALUE_def) .EQ. TRIM(atmgrb(k))
                END DO
-               ! write(*,*) i,ltype,'3dv ',trim(VALUE_def),kv,pcat,atmgrb(kv)
                !write(kunit,*) i,ltype,'3dv ',trim(value),kv,pcat,pnum
 
                IF (kv .NE. -1) THEN
@@ -802,13 +805,21 @@ PROGRAM era52arl
 
    !Have disabled the inquire. will always overwrite the packing cfg file.
 
-   !INQUIRE(FILE=TRIM(arlcfg_name),EXIST=ftest)
-   !IF(.NOT.ftest)THEN
+   ! INQUIRE (FILE=TRIM(arlcfg_name), EXIST=ftest)
+   ! IF (.NOT. ftest) THEN
 
    IF (udif) THEN
       NUMATM = NUMATM + 1  !The difw field was added
       NUMSFC = NUMSFC + 1  !The difr field was added
    END IF
+
+   WRITE (*, *) 'Creating encoding configuration:', TRIM(arlcfg_name)
+   ! WRITE (*, *) 'NUMSFC:', NUMSFC
+   ! WRITE (*, *) 'SFCVAR:', SFCVAR(:)
+   ! WRITE (*, *) 'SFCARL:', SFCARL(:)
+   ! WRITE (*, *) 'NUMATM:', NUMATM
+   ! WRITE (*, *) 'ATMVAR:', ATMVAR(:, 2)
+   ! WRITE (*, *) 'ATMARL:', ATMARL
 
    CALL MAKNDX(ARLCFG_NAME, MODEL, NXP, NYP, NUMLEV, CLAT, CLON, DLAT, DLON, &
                RLAT, RLON, TLAT1, TLAT2, NUMSFC, NUMATM, NDXLEVELS, &
@@ -816,9 +827,9 @@ PROGRAM era52arl
 
    DEALLOCATE (ndxlevels)
 
-   !ELSE
-   !   WRITE(*,*)'Existing encoding configuration:',TRIM(arlcfg_name)
-   !END IF
+   ! ELSE
+   !    WRITE (*, *) 'Existing encoding configuration:', TRIM(arlcfg_name)
+   ! END IF
 ! initialize the packing routine common block and open the output file
    CALL PAKSET(lunit, ARLCFG_NAME, 1, NXP, NYP, NZP)
    OPEN (lunit, FILE=TRIM(data_name), RECL=(50 + NXP*NYP), ACCESS='DIRECT', &
